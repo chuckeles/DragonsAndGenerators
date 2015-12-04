@@ -3,4 +3,6 @@ compiler: gcc
 
 script:
 - mkdir Build
-- cmake --build Build --target all
+- cd Build
+- cmake ..
+- cmake --build .
