@@ -8,7 +8,7 @@ find_library(Check REQUIRED)
 include_directories(${CHECK_INCLUDE_DIRS})
 
 # add test files
-set(TEST_FILES Test/Main.c)
+set(TEST_FILES Main.c)
 
 # build the test executable
 add_executable(DragonsAndGeneratorsTests ${TEST_FILES})
