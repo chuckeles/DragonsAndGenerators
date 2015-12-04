@@ -1,26 +1,11 @@
 # configure the project
 project(DragonsAndGeneratorsTests)
 
-# find check
-find_library(Check REQUIRED)
-
-# include check
-include_directories(${CHECK_INCLUDE_DIRS})
-
 # add test files
 set(TEST_FILES Main.c)
-
-if(${CHECK_FOUND})
 
 # build the test executable
 add_executable(DragonsAndGeneratorsTests ${TEST_FILES})
 
-# link with check
-target_link_libraries(DragonsAndGeneratorsTests ${CHECK_LIBRARIES})
-
 # add cmake test
 add_test(DragonsAndGeneratorsTests ${CMAKE_CURRENT_BINARY_DIR}/DragonsAndGeneratorsTests)
-
-else(${CHECK_FOUND})
-    message(FATAL_ERROR "No Check!")
-endif (${CHECK_FOUND})
