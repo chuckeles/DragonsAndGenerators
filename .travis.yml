@@ -1,4 +1,6 @@
 language: c
 compiler: gcc
 
-script: cmake --build Build --target all
+script:
+- mkdir Build
+- cmake --build Build --target all
