@@ -1,6 +1,13 @@
 language: c
 compiler: gcc
 
+addons:
+  apt:
+    packages:
+    - check
+    - cmake
+
+
 script:
 - mkdir Build
 - cd Build
