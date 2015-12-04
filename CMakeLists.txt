@@ -5,6 +5,9 @@ cmake_minimum_required(VERSION 2.8)
 project(DragonsAndGenerators)
 set(CMAKE_C_STANDARD 90)
 
+# add include files
+include_directories(Include)
+
 # add source files
 set(SOURCE_FILES Source/Main.c)
 
