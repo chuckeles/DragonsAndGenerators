@@ -1,6 +1,4 @@
-# Dragons and Generators
-
-[![Travis](https://img.shields.io/travis/chuckeles/DragonsAndGenerators.svg?style=flat-square)](https://travis-ci.org/chuckeles/DragonsAndGenerators)
+# Dragons and Generators [![Travis](https://img.shields.io/travis/chuckeles/DragonsAndGenerators.svg?style=flat-square)](https://travis-ci.org/chuckeles/DragonsAndGenerators)
 
 ## Information
 
