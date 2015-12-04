@@ -6,15 +6,15 @@
  */
 typedef enum History {
 
-  Empty = 0,
+  HistoryEmpty = 0,
 
-  Dragon = 1,
-  Generator = 2,
-  Princess0 = 4,
-  Princess1 = 8,
-  Princess2 = 16,
+  HistoryDragon = 1,
+  HistoryGenerator = 2,
+  HistoryPrincess0 = 4,
+  HistoryPrincess1 = 8,
+  HistoryPrincess2 = 16,
 
-  All = 31
+  HistoryAll = 31
 
 } History;
 
