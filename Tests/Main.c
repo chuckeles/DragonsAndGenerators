@@ -10,7 +10,7 @@
 #include "History.h"
 
 /*
- * Test for the History enum.
+ * Tests for the History enum.
  */
 START_TEST(HistoryTest)
 {

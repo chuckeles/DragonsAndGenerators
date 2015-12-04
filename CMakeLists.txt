@@ -18,4 +18,4 @@ enable_testing()
 include_directories(Include)
 
 # add projects
-add_subdirectory(Test)
+add_subdirectory(Tests)
