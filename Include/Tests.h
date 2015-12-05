@@ -7,5 +7,6 @@
  * Declaration of all test cases.
  */
 TCase* HistoryTCase();
+TCase* HeapTCase();
 
 #endif

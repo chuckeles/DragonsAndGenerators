@@ -2,9 +2,10 @@
 #include "Tests.h"
 
 /*
- * Test for the History enum.
+ * Basic test for the History enum.
  */
-START_TEST(HistoryTest) {
+START_TEST(HistoryTest)
+{
 
   // check the empty history
   ck_assert_int_eq(HistoryEmpty, 0);
