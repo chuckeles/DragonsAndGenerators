@@ -1,4 +1,4 @@
-#include "HeapEntry.h"
+#include "Heap.h"
 #include "Tests.h"
 
 /*
