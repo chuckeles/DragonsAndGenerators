@@ -1,3 +1,6 @@
+#include <stdlib.h>
+
+#include "History.h"
 #include "Stage.h"
 
 /*
@@ -6,10 +9,14 @@
 
 Stage* CreateStages(char* map, ushort width, ushort height) {
 
-  return NULL;
+  // allocate the stage array
+  return calloc(HistoryAll - 1, sizeof(Stage));
 
 }
 
 void DeleteStages(Stage* stages) {
+
+  // free the array
+  free(stages);
 
 }
