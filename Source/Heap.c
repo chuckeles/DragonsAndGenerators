@@ -60,31 +60,31 @@ void DeleteHeap(Heap heap) {
 
 }
 
-void HeapPush(Heap heap, HeapEntry entry) {
+void HeapPush(Heap* heap, HeapEntry entry) {
 
   // save the new index
-  uint index = heap.size;
+  uint index = heap->size;
 
   // insert to the end
-  heap.array[heap.size++] = entry;
+  heap->array[heap->size++] = entry;
 
   // swap until it's a min heap again
-  while (index != 0 && CompareEntries(heap.array[PARENT(index)], entry) > 0) { // order.priority > gHeap[Parent(index)].priority) {
+  while (index != 0 && CompareEntries(heap->array[PARENT(index)], entry) > 0) { // order.priority > gHeap[Parent(index)].priority) {
     // swap them
-    heap.array[index] = heap.array[PARENT(index)];
-    heap.array[PARENT(index)] = entry;
+    heap->array[index] = heap->array[PARENT(index)];
+    heap->array[PARENT(index)] = entry;
     index = PARENT(index);
   }
 
 }
 
-HeapEntry HeapPop(Heap heap) {
+HeapEntry HeapPop(Heap* heap) {
 
   // extract the root
-  HeapEntry result = heap.array[0];
+  HeapEntry result = heap->array[0];
 
   // decrease size
-  --heap.size;
+  --heap->size;
 
   // return the result
   return result;

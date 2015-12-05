@@ -36,10 +36,10 @@ START_TEST(HeapPushPop)
   entry.tile = 1;
 
   // push the entry
-  HeapPush(heap, entry);
+  HeapPush(&heap, entry);
 
   // pop an entry
-  HeapEntry entry2 = HeapPop(heap);
+  HeapEntry entry2 = HeapPop(&heap);
 
   // check it
   ck_assert_int_eq(entry.path, entry2.path);
