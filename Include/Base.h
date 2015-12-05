@@ -12,8 +12,13 @@ typedef unsigned long ulong;
 /*
  * Base defines so I don't have to include stdlib.
  */
-#define NULL ((void*) 0)
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
+#ifndef NULL
+  #define NULL ((void*) 0)
+#endif
+
+#ifndef EXIT_SUCCESS
+  #define EXIT_SUCCESS 0
+  #define EXIT_FAILURE 1
+#endif
 
 #endif
