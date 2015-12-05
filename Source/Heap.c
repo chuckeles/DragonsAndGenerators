@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "Heap.h"
 
 /*
@@ -6,10 +8,14 @@
 
 Heap CreateHeap() {
 
-  return NULL;
+  // create an empty array
+  return malloc(MAX_HEAP_SIZE * sizeof(HeapEntry));
 
 }
 
 void DeleteHeap(Heap heap) {
+
+  // free the heap
+  free(heap);
 
 }

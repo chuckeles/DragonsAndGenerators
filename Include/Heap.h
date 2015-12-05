@@ -4,6 +4,11 @@
 #include "HeapEntry.h"
 
 /*
+ * Maximum heap size. Defines the size of the heap array.
+ */
+#define MAX_HEAP_SIZE 1000
+
+/*
  * Heap type. Just an array of entries.
  */
 typedef HeapEntry* Heap;
