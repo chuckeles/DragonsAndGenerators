@@ -4,7 +4,6 @@
  * For license information, check the LICENSE.md file.
  */
 
-#include <check.h>
 #include <stdlib.h>
 
 #include "Tests.h"
@@ -14,13 +13,12 @@
  */
 int main() {
 
-  // create suite and test case
-  Suite* suite = suite_create("History");
-  TCase* tcase = tcase_create("Main");
+  // create suite and test cases
+  Suite* suite = suite_create("Main");
+  TCase* historyCase = HistoryTCase();
 
-  // add test
-  tcase_add_test(tcase, HistoryTest);
-  suite_add_tcase(suite, tcase);
+  // add test cases to suite
+  suite_add_tcase(suite, historyCase);
 
   // create a runner
   SRunner* srunner = srunner_create(suite);
@@ -32,6 +30,7 @@ int main() {
   // free
   srunner_free(srunner);
 
+  // done
   return failed > 0 ? EXIT_FAILURE : EXIT_SUCCESS;
 
 }

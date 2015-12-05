@@ -1,9 +1,11 @@
 #ifndef _TESTS_H
 #define _TESTS_H
 
+#include <check.h>
+
 /*
- * Declaration of all tests.
+ * Declaration of all test cases.
  */
-static void HistoryTest(int);
+TCase* HistoryTCase();
 
 #endif

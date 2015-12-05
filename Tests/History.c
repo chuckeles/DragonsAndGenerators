@@ -1,5 +1,3 @@
-#include <check.h>
-
 #include "History.h"
 #include "Tests.h"
 
@@ -17,3 +15,19 @@ START_TEST(HistoryTest) {
 
 }
 END_TEST
+
+/*
+ * History test case.
+ */
+TCase* HistoryTCase() {
+
+  // create the test case
+  TCase* tcase = tcase_create("History");
+
+  // add tests
+  tcase_add_test(tcase, HistoryTest);
+
+  // return the test case
+  return tcase;
+
+}
