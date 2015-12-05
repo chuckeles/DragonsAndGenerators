@@ -79,7 +79,55 @@ void HeapPush(Heap heap, HeapEntry entry) {
 
 HeapEntry HeapPop(Heap heap) {
 
-  HeapEntry e;
-  return e;
+  // extract the root
+  HeapEntry result = heap.array[0];
+
+  // extract R
+  uint Ri = 0;
+  HeapEntry R = heap.array[0];
+
+  // extract P
+  HeapEntry P = heap.array[--heap.size];
+
+  // move stuff around
+  /*while (P.priority < R.priority && (Left(Ri) < heap.arraySize || Right(Ri) < heap.arraySize)) {
+    // the children
+    HeapEntry left;
+    HeapEntry right;
+
+    // set maximum priority
+    left.priority = INT_MIN;
+    right.priority = INT_MIN;
+
+    // get them
+    if (Left(Ri) < heap.arraySize)
+      left = heap.array[Left(Ri)];
+    if (Right(Ri) < heap.arraySize)
+      right = heap.array[Right(Ri)];
+
+    // get the smaller one
+    if (left.priority > right.priority) {
+      if (left.priority > P.priority) {
+        // move the left child
+        heap.array[Ri] = left;
+        Ri = Left(Ri);
+      }
+      R = left;
+    }
+    else {
+      if (right.priority > P.priority) {
+        // move the right child
+        heap.array[Ri] = right;
+        Ri = Right(Ri);
+      }
+      R = right;
+    }
+  }*/
+
+  // place P
+  heap.array[Ri] = P;
+
+  // return the result
+  return result;
 
 }
