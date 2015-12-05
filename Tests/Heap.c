@@ -92,15 +92,19 @@ START_TEST(HeapMinTest)
   ck_assert_int_eq(heap.size, 4);
 
   // pop and check
-  ck_assert_int_eq(HeapPop(&heap).path, 4);
+  HeapEntry popEntry1 = HeapPop(&heap);
   HeapEntry popEntry2 = HeapPop(&heap);
   HeapEntry popEntry3 = HeapPop(&heap);
-  ck_assert_int_eq(HeapPop(&heap).path, 8);
+  HeapEntry popEntry4 = HeapPop(&heap);
 
+  ck_assert_int_eq(popEntry1.path, 4);
+  
   ck_assert_int_eq(popEntry2.path, 5);
   ck_assert_int_eq(popEntry3.path, 5);
   ck_assert_int_eq(popEntry2.direction, 1);
   ck_assert_int_eq(popEntry3.direction, 3);
+
+  ck_assert_int_eq(popEntry4.path, 8);
 
   // check size
   ck_assert_int_eq(heap.size, 0);
