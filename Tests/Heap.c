@@ -20,6 +20,40 @@ START_TEST(HeapCreateTest)
 END_TEST
 
 /*
+ * Test for pushing and popping items from a heap.
+ */
+START_TEST(HeapPushPop)
+{
+
+  // create a heap
+  Heap heap = CreateHeap();
+
+  // make an entry
+  HeapEntry entry;
+  entry.path = 2;
+  entry.direction = 0;
+  entry.history = HistoryDragon | HistoryPrincess0;
+  entry.tile = 1;
+
+  // push the entry
+  HeapPush(heap, entry);
+
+  // pop an entry
+  HeapEntry entry2 = HeapPop(heap);
+
+  // check it
+  ck_assert_int_eq(entry.path, entry2.path);
+  ck_assert_int_eq(entry.direction, entry2.direction);
+  ck_assert_int_eq(entry.history, entry2.history);
+  ck_assert_int_eq(entry.tile, entry2.tile);
+
+  // delete heap
+  DeleteHeap(heap);
+
+}
+END_TEST
+
+/*
  * Heap test case.
  */
 TCase* HeapTCase() {
