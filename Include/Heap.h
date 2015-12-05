@@ -35,4 +35,14 @@ Heap CreateHeap();
  */
 void DeleteHeap(Heap heap);
 
+/*
+ * Pushes an entry into the heap.
+ */
+void HeapPush(Heap heap, HeapEntry entry);
+
+/*
+ * Pops an entry from the heap.
+ */
+HeapEntry HeapPop(Heap heap);
+
 #endif

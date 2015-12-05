@@ -28,3 +28,14 @@ void DeleteHeap(Heap heap) {
   free(heap.array);
 
 }
+
+void HeapPush(Heap heap, HeapEntry entry) {
+
+}
+
+HeapEntry HeapPop(Heap heap) {
+
+  HeapEntry e;
+  return e;
+
+}

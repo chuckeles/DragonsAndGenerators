@@ -63,6 +63,7 @@ TCase* HeapTCase() {
 
   // add tests
   tcase_add_test(tcase, HeapCreateTest);
+  tcase_add_test(tcase, HeapPushPop);
 
   // return the test case
   return tcase;
