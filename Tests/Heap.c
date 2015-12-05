@@ -28,6 +28,7 @@ TCase* HeapTCase() {
   TCase* tcase = tcase_create("Heap");
 
   // add tests
+  tcase_add_test(tcase, HeapCreateTest);
 
   // return the test case
   return tcase;
