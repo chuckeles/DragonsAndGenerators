@@ -7,15 +7,8 @@
 START_TEST(StagesCreateTest)
 {
 
-  // make up map size
-  ushort width = 1;
-  ushort height = 1;
-
-  // create a map
-  char* map = "C";
-
   // create stages
-  Stage* stages = CreateStages(map, width, height);
+  Stage* stages = CreateStages("C", 1, 1);
 
   // check them
   ck_assert_int_ne(stages, NULL);
@@ -24,6 +17,48 @@ START_TEST(StagesCreateTest)
   DeleteStages(stages);
 
 }
+END_TEST
+
+/*
+ * Test for stage depth.
+ */
+START_TEST(StagesDepthTest)
+  {
+
+    // create stages
+    Stage* stages = CreateStages("C", 1, 1);
+
+    // check the depth
+    ck_assert_int_ne(stages[HistoryAll - 1].tiles, NULL);
+
+    // delete stages
+    DeleteStages(stages);
+
+  }
+END_TEST
+
+/*
+ * Test for initialization of the first stage.
+ */
+START_TEST(StagesFirstTest)
+  {
+
+    // make a map
+    char* map = "CCCC";
+
+    // create stages
+    Stage* stages = CreateStages(map, 2, 2);
+
+    // check the first stage
+    ck_assert_int_eq(stages[0].history, HistoryEmpty);
+    ck_assert_int_eq(strcmp(stages[0].tiles, map), 0);
+    ck_assert_int_eq(strlen(stages[0].paths), 4);
+    ck_assert_int_eq(strlen(stages[0].directions), 4);
+
+    // delete stages
+    DeleteStages(stages);
+
+  }
 END_TEST
 
 /*
@@ -36,6 +71,8 @@ TCase* StageTCase() {
 
   // add tests
   tcase_add_test(tcase, StagesCreateTest);
+  tcase_add_test(tcase, StagesDepthTest);
+  tcase_add_test(tcase, StagesFirstTest);
 
   // return the test case
   return tcase;
