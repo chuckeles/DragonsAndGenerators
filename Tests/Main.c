@@ -16,10 +16,12 @@ int main() {
   Suite* suite = suite_create("Main");
   TCase* historyCase = HistoryTCase();
   TCase* heapCase = HeapTCase();
+  TCase* stageCase = StageTCase();
 
   // add test cases to suite
   suite_add_tcase(suite, historyCase);
   suite_add_tcase(suite, heapCase);
+  suite_add_tcase(suite, stageCase);
 
   // create a runner
   SRunner* srunner = srunner_create(suite);

@@ -8,5 +8,6 @@
  */
 TCase* HistoryTCase();
 TCase* HeapTCase();
+TCase* StageTCase();
 
 #endif

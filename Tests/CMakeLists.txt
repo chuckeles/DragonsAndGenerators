@@ -5,7 +5,7 @@ project(DragonsAndGeneratorsTests)
 include_directories({$CHECK_INCLUDE_DIRS})
 
 # add test files
-set(TEST_FILES Main.c History.c Heap.c)
+set(TEST_FILES Main.c History.c Heap.c Stage.c)
 
 # build the test executable
 add_executable(DragonsAndGeneratorsTests ${TEST_FILES})
