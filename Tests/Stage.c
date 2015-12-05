@@ -62,6 +62,29 @@ START_TEST(StagesFirstTest)
 END_TEST
 
 /*
+ * Test for correct stage history.
+ */
+START_TEST(StagesHistoryTest)
+{
+
+  // bloody iterator
+  History i;
+
+  // create stages
+  Stage* stages = CreateStages("C", 1, 1);
+
+  // check the history
+  for (i = HistoryEmpty; i < HistoryAll; ++i) {
+    ck_assert_int_eq(stages[i].history, i);
+  }
+
+  // delete stages
+  DeleteStages(stages);
+
+}
+END_TEST
+
+/*
  * Stage test case.
  */
 TCase* StageTCase() {
@@ -73,6 +96,7 @@ TCase* StageTCase() {
   tcase_add_test(tcase, StagesCreateTest);
   tcase_add_test(tcase, StagesDepthTest);
   tcase_add_test(tcase, StagesFirstTest);
+  tcase_add_test(tcase, StagesHistoryTest);
 
   // return the test case
   return tcase;
