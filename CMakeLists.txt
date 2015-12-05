@@ -14,4 +14,5 @@ include_directories(Include)
 
 # add projects
 add_subdirectory(Check)
+add_subdirectory(Source)
 add_subdirectory(Tests)

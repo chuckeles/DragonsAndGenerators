@@ -9,4 +9,9 @@ typedef unsigned short ushort;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
+/*
+ * NULL pointer.
+ */
+#define NULL ((void*) 0)
+
 #endif
