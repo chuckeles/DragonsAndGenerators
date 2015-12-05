@@ -52,8 +52,8 @@ START_TEST(StagesFirstTest)
     // check the first stage
     ck_assert_int_eq(stages[0].history, HistoryEmpty);
     ck_assert_int_eq(strcmp(stages[0].tiles, map), 0);
-    ck_assert_int_eq(strlen(stages[0].paths), 4);
-    ck_assert_int_eq(strlen(stages[0].directions), 4);
+    ck_assert_int_eq(stages[0].paths[3], 0);
+    ck_assert_int_eq(stages[0].directions[3], 0);
 
     // delete stages
     DeleteStages(stages);
