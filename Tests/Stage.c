@@ -23,42 +23,42 @@ END_TEST
  * Test for stage depth.
  */
 START_TEST(StagesDepthTest)
-  {
+{
 
-    // create stages
-    Stage* stages = CreateStages("C", 1, 1);
+  // create stages
+  Stage* stages = CreateStages("C", 1, 1);
 
-    // check the depth
-    ck_assert_int_ne(stages[HistoryAll - 1].tiles, NULL);
+  // check the depth
+  ck_assert_int_ne(stages[HistoryAll - 1].tiles, NULL);
 
-    // delete stages
-    DeleteStages(stages);
+  // delete stages
+  DeleteStages(stages);
 
-  }
+}
 END_TEST
 
 /*
  * Test for initialization of the first stage.
  */
 START_TEST(StagesFirstTest)
-  {
+{
 
-    // make a map
-    char* map = "CCCC";
+  // make a map
+  char* map = "CCCC";
 
-    // create stages
-    Stage* stages = CreateStages(map, 2, 2);
+  // create stages
+  Stage* stages = CreateStages(map, 2, 2);
 
-    // check the first stage
-    ck_assert_int_eq(stages[0].history, HistoryEmpty);
-    ck_assert_int_eq(strcmp(stages[0].tiles, map), 0);
-    ck_assert_int_eq(stages[0].paths[3], 0);
-    ck_assert_int_eq(stages[0].directions[3], 0);
+  // check the first stage
+  ck_assert_int_eq(stages[0].history, HistoryEmpty);
+  ck_assert_int_eq(strcmp(stages[0].tiles, map), 0);
+  ck_assert_int_eq(stages[0].paths[3], 0);
+  ck_assert_int_eq(stages[0].directions[3], 0);
 
-    // delete stages
-    DeleteStages(stages);
+  // delete stages
+  DeleteStages(stages);
 
-  }
+}
 END_TEST
 
 /*
