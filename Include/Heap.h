@@ -11,7 +11,19 @@
 /*
  * Heap type. Just an array of entries.
  */
-typedef HeapEntry* Heap;
+typedef struct Heap {
+
+  /*
+   * The entry array
+   */
+  HeapEntry* array;
+
+  /*
+   * The size of the heap.
+   */
+  uint size;
+
+} Heap;
 
 /*
  * Creates an empty heap.
