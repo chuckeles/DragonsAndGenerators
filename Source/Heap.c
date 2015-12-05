@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -69,7 +70,7 @@ void HeapPush(Heap* heap, HeapEntry entry) {
   heap->array[heap->size++] = entry;
 
   // swap until it's a min heap again
-  while (index != 0 && CompareEntries(heap->array[PARENT(index)], entry) > 0) { // order.priority > gHeap[Parent(index)].priority) {
+  while (index != 0 && CompareEntries(heap->array[PARENT(index)], entry) > 0) {
     // swap them
     heap->array[index] = heap->array[PARENT(index)];
     heap->array[PARENT(index)] = entry;
@@ -85,6 +86,56 @@ HeapEntry HeapPop(Heap* heap) {
 
   // decrease size
   --heap->size;
+
+  // check if anything remains
+  if (heap->size > 0) {
+    // extract R
+    uint Ri = 0;
+    HeapEntry R = heap->array[0];
+
+    // extract P
+    HeapEntry P = heap->array[heap->size];
+
+    // move stuff around
+    while (CompareEntries(P, R) > 0 && (LEFT(Ri) < heap->size || RIGHT(Ri) < heap->size)) {
+      // the children
+      HeapEntry left;
+      HeapEntry right;
+
+      // set maximum path length and direction
+      left.path = UCHAR_MAX;
+      right.path = UCHAR_MAX;
+      left.direction = UCHAR_MAX;
+      right.direction = UCHAR_MAX;
+
+      // get them
+      if (LEFT(Ri) < heap->size)
+        left = heap->array[LEFT(Ri)];
+      if (RIGHT(Ri) < heap->size)
+        right = heap->array[RIGHT(Ri)];
+
+      // get the smaller one
+      if (CompareEntries(left, right) < 0) {
+        if (CompareEntries(left, P) < 0) {
+          // move the left child
+          heap->array[Ri] = left;
+          Ri = LEFT(Ri);
+        }
+        R = left;
+      }
+      else {
+        if (CompareEntries(left, P) < 0) {
+          // move the right child
+          heap->array[Ri] = right;
+          Ri = RIGHT(Ri);
+        }
+        R = right;
+      }
+    }
+
+    // place P
+    heap->array[Ri] = P;
+  }
 
   // return the result
   return result;
