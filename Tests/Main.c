@@ -4,8 +4,7 @@
  * For license information, check the LICENSE.md file.
  */
 
-#include <stdlib.h>
-
+#include "BaseTypes.h"
 #include "Tests.h"
 
 /*
