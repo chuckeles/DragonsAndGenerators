@@ -21,8 +21,8 @@ Stage* CreateStages(char* map, ushort width, ushort height) {
 
   // make the paths and directions
   uint size = width * height;
-  stages[0].paths = malloc(size * sizeof(char));
-  stages[0].directions = malloc(size * sizeof(char));
+  stages[0].paths = malloc(size * sizeof(uchar));
+  stages[0].directions = malloc(size * sizeof(uchar));
 
   for (i = 0; i < size; ++i) {
     stages[0].paths[i] = 0;
