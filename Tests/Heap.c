@@ -38,8 +38,14 @@ START_TEST(HeapPushPop)
   // push the entry
   HeapPush(&heap, entry);
 
+  // check size
+  ck_assert_int_eq(heap.size, 1);
+
   // pop an entry
   HeapEntry entry2 = HeapPop(&heap);
+
+  // check size
+  ck_assert_int_eq(heap.size, 0);
 
   // check it
   ck_assert_int_eq(entry.path, entry2.path);
