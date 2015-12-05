@@ -31,4 +31,14 @@ typedef struct Stage {
 
 } Stage;
 
+/*
+ * Creates and sets up stages.
+ */
+Stage* CreateStages(char* map, ushort width, ushort height);
+
+/*
+ * Deletes stages.
+ */
+void DeleteStages(Stage* stages);
+
 #endif
