@@ -1,5 +1,5 @@
-#ifndef _BASETYPES_H
-#define _BASETYPES_H
+#ifndef _BASE_H
+#define _BASE_H
 
 /*
  * Base types shortcutted for better usage.

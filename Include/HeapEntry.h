@@ -1,7 +1,7 @@
 #ifndef _HEAPENTRY_H
 #define _HEAPENTRY_H
 
-#include "BaseTypes.h"
+#include "Base.h"
 #include "History.h"
 
 /*
