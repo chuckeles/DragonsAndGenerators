@@ -11,7 +11,7 @@ START_TEST(HeapCreateTest)
   Heap heap = CreateHeap();
 
   // check if it exists
-  ck_assert_ptr_ne(heap.array, NULL);
+  ck_assert_uint_ne(heap.array, NULL);
 
   // delete heap
   DeleteHeap(heap);
