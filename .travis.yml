@@ -1,15 +1,20 @@
+# configuration
 language: c
 compiler: gcc
 
 addons:
   apt:
     packages:
-    - check
-    - cmake
+      - check
+      - cmake
 
+# go to the build directory
+before_script:
+  - mkdir Build
+  - cd Build
 
+# build and test
 script:
-- mkdir Build
-- cd Build
-- cmake ..
-- cmake --build . --target all
+  - cmake ..
+  - cmake --build . --target all
+  - ctest
