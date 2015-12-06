@@ -15,11 +15,10 @@
  * Helpful and weird macro for adding neighbours to avoid duplicate code.
  */
 #define PUSH_NEIGHBOUR \
-  // check if it is not an obstacle \
   ushort tile = MAKE_1D(neighbourX, neighbourY, width); \
   char tileChar = stage->tiles[tile]; \
+  \
   if (tileChar != 'n') { \
-    // set the entry \
     neighbour. \
     path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1)); \
     neighbour. \
@@ -29,7 +28,6 @@
     neighbour. \
     tile = tile; \
     \
-    // add to the heap \
     HeapPush(&heap, neighbour); \
   }
 
