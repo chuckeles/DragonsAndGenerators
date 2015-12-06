@@ -14,19 +14,15 @@
 /*
  * Helpful and weird macro for adding neighbours to avoid duplicate code.
  */
-#define PUSH_NEIGHBOUR \
+#define PUSH_NEIGHBOUR(dir) \
   ushort tile = MAKE_1D(neighbourX, neighbourY, width); \
   char tileChar = stage->tiles[tile]; \
   \
   if (tileChar != 'n') { \
-    neighbour. \
-    path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1)); \
-    neighbour. \
-    direction = 0; \
-    neighbour. \
-    history = entry.history; \
-    neighbour. \
-    tile = tile; \
+    neighbour.path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1)); \
+    neighbour.direction = dir; \
+    neighbour.history = entry.history; \
+    neighbour.tile = tile; \
     \
     HeapPush(&heap, neighbour); \
   }
@@ -91,7 +87,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
             neighbourX = (ushort) (x - 1);
             neighbourY = y;
 
-            PUSH_NEIGHBOUR
+            PUSH_NEIGHBOUR(0)
           }
 
           // up
@@ -100,7 +96,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
             neighbourX = x;
             neighbourY = (ushort) (y - 1);
 
-            PUSH_NEIGHBOUR
+            PUSH_NEIGHBOUR(1)
           }
 
           // down
@@ -109,7 +105,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
             neighbourX = x;
             neighbourY = (ushort) (y + 1);
 
-            PUSH_NEIGHBOUR
+            PUSH_NEIGHBOUR(2)
           }
 
           // right
@@ -118,7 +114,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
             neighbourX = (ushort) (x + 1);
             neighbourY = y;
 
-            PUSH_NEIGHBOUR
+            PUSH_NEIGHBOUR(3)
           }
         }
 
