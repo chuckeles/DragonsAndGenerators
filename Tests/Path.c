@@ -9,7 +9,7 @@ START_TEST(SimplePathTest)
 {
 
   // make stages
-  Stage* stages = CreateStages("cdppp", 5, 1);
+  Stage* stages = CreateStages("cdpqr", 5, 1);
 
   // get the path
   uint length;

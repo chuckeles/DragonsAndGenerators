@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "Heap.h"
 #include "Path.h"
@@ -33,6 +34,57 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
   while (heap.size > 0) {
     // get the next tile
     HeapEntry entry = HeapPop(&heap);
+
+    // get the stage
+    Stage* stage = stages + entry.history;
+
+    // get tile's existing path
+    uchar oldPath = stage->paths[entry.tile];
+
+    // get position
+    ushort x = (ushort) MAKE_2D_X(entry.tile, width);
+    ushort y = (ushort) MAKE_2D_Y(entry.tile, width);
+
+    // DEBUG
+    printf("Processing tile: %c\n", stage->tiles[entry.tile]);
+
+    // check the tile
+    switch (stage->tiles[entry.tile]) {
+      default:
+        // check existing path
+        if (oldPath == 0 || oldPath > entry.path) {
+          // update the tile
+          stage->paths[entry.tile] = entry.path;
+          stage->directions[entry.tile] = entry.direction;
+
+          // add neighbours to the heap
+          HeapEntry neighbour;
+          ushort neighbourX;
+          ushort neighbourY;
+
+          if (x > 0) {
+            // set position
+            neighbourX = (ushort) (x - 1);
+            neighbourY = y;
+
+            // check if it is not an obstacle
+            ushort tile = MAKE_1D(neighbourX, neighbourY, width);
+            char tileChar = stage->tiles[tile];
+            if (tileChar != 'n') {
+              // set the entry
+              neighbour.path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1));
+              neighbour.direction = 0;
+              neighbour.history = entry.history;
+              neighbour.tile = tile;
+
+              // add to the heap
+              HeapPush(&heap, neighbour);
+            }
+          }
+        }
+
+        break;
+    }
   }
 
   // delete the heap
