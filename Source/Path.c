@@ -98,7 +98,7 @@ inline void EnsureStageExists(Stage* stage, Stage* newStage, ushort width, ushor
  */
 inline void ProcessStageTile(Stage* stages, Heap* heap, Stage* stage, HeapEntry entry,
                              ushort x, ushort y, ushort width, ushort height, History addHistory) {
-  // check if already killed dragon
+  // check if already on the required stage
   if (entry.history & addHistory) {
     // just process
     ProcessTile(heap, stage, entry, x, y, width, height);

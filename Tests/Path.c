@@ -196,7 +196,7 @@ START_TEST(SimplePathDragonPrincessTest)
   ushort i;
 
   // make stages
-  Stage* stages = CreateStages("cpcdp", 5, 1);
+  Stage* stages = CreateStages("cpcdc", 5, 1);
 
   // get the path
   uint length;
