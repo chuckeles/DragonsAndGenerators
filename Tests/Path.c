@@ -1,3 +1,4 @@
+#include "Path.h"
 #include "Stage.h"
 #include "Tests.h"
 
@@ -12,7 +13,10 @@ START_TEST(SimplePathTest)
 
   // get the path
   uint length;
-  int* path = FindPath(stages, 5, 1);
+  int* path = FindPath(stages, 5, 1, &length);
+
+  // check the length
+  ck_assert_int_eq(length, 5);
 
   // check the path
   ushort i;
