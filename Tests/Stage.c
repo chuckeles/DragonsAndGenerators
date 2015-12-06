@@ -8,7 +8,7 @@ START_TEST(StagesCreateTest)
 {
 
   // create stages
-  Stage* stages = CreateStages("C", 1, 1);
+  Stage* stages = CreateStages("c", 1, 1);
 
   // check them
   ck_assert_int_ne(stages, NULL);
@@ -26,7 +26,7 @@ START_TEST(StagesDepthTest)
 {
 
   // create stages
-  Stage* stages = CreateStages("C", 1, 1);
+  Stage* stages = CreateStages("c", 1, 1);
 
   // check the depth
   ck_assert_int_ne(stages[HistoryAll - 1].tiles, NULL);
@@ -44,7 +44,7 @@ START_TEST(StagesFirstTest)
 {
 
   // make a map
-  char* map = "CCCC";
+  char* map = "cccc";
 
   // create stages
   Stage* stages = CreateStages(map, 2, 2);
@@ -71,7 +71,7 @@ START_TEST(StagesHistoryTest)
   History i;
 
   // create stages
-  Stage* stages = CreateStages("C", 1, 1);
+  Stage* stages = CreateStages("c", 1, 1);
 
   // check the history
   for (i = HistoryEmpty; i < HistoryAll; ++i) {
