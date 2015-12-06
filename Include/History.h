@@ -14,7 +14,9 @@ typedef enum History {
   HistoryPrincess1 = 8,
   HistoryPrincess2 = 16,
 
-  HistoryAll = 31
+  HistoryAll = 31,
+
+  HistoryFinish = HistoryPrincess0 | HistoryPrincess1 | HistoryPrincess2
 
 } History;
 
