@@ -211,13 +211,13 @@ START_TEST(SimplePathDragonPrincessTest)
   // check the path in the dragon stage
   for (i = 1; i < 4; ++i) {
     ck_assert_int_eq(stages[HistoryDragon].paths[i], 7 - i);
-    ck_assert_int_eq(stages[HistoryDragon].directions[i], 0);
+    ck_assert_int_eq(stages[HistoryDragon].directions[i], i < 3 ? 0 : 3);
   }
 
   // check the path in the princess stage
   for (i = 1; i < 5; ++i) {
-    ck_assert_int_eq(stages[HistoryPrincess0].paths[i], i + 5);
-    ck_assert_int_eq(stages[HistoryPrincess0].directions[i], 3);
+    ck_assert_int_eq(stages[HistoryDragon | HistoryPrincess0].paths[i], i + 5);
+    ck_assert_int_eq(stages[HistoryDragon | HistoryPrincess0].directions[i], i > 1 ? 3 : 0);
   }
 
   // delete path and stages
