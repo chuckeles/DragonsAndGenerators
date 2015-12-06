@@ -57,21 +57,18 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
     // get tile's existing path
     uchar oldPath = stage->paths[entry.tile];
 
-    // get position
-    ushort x = (ushort) MAKE_2D_X(entry.tile, width);
-    ushort y = (ushort) MAKE_2D_Y(entry.tile, width);
+    // check existing path
+    if (oldPath == 0 || oldPath > entry.path) {
+      // get position
+      ushort x = (ushort) MAKE_2D_X(entry.tile, width);
+      ushort y = (ushort) MAKE_2D_Y(entry.tile, width);
 
-    // DEBUG
-    printf("Processing tile %c [%u, %u] in stage %u\n", stage->tiles[entry.tile], x, y, entry.history);
+      // DEBUG
+      printf("Processing tile %c [%u, %u] in stage %u\n", stage->tiles[entry.tile], x, y, entry.history);
 
-    // check the tile
-    switch (stage->tiles[entry.tile]) {
-      default:
-        // check existing path
-        if (oldPath == 0 || oldPath > entry.path) {
-          // DEBUG
-          printf("Updating tile\n");
-
+      // check the tile
+      switch (stage->tiles[entry.tile]) {
+        default:
           // update the tile
           stage->paths[entry.tile] = entry.path;
           stage->directions[entry.tile] = entry.direction;
@@ -116,9 +113,9 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
             PUSH_NEIGHBOUR(3)
           }
-        }
 
-        break;
+          break;
+      }
     }
   }
 
