@@ -71,9 +71,6 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
     // check the tile
     switch (stage->tiles[entry.tile]) {
       default:
-        // DEBUG
-        printf("Default processing\n");
-
         // check existing path
         if (oldPath == 0 || oldPath > entry.path) {
           // DEBUG
@@ -90,9 +87,6 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
           // left
           if (x > 0) {
-            // DEBUG
-            printf("Adding left neighbour\n");
-
             // set position
             neighbourX = (ushort) (x - 1);
             neighbourY = y;
@@ -102,9 +96,6 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
           // up
           if (y > 0) {
-            // DEBUG
-            printf("Adding up neighbour\n");
-
             // set position
             neighbourX = x;
             neighbourY = (ushort) (y - 1);
@@ -114,9 +105,6 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
           // down
           if (y < height - 1) {
-            // DEBUG
-            printf("Adding down neighbour\n");
-
             // set position
             neighbourX = x;
             neighbourY = (ushort) (y + 1);
@@ -126,9 +114,6 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
           // right
           if (x < width - 1) {
-            // DEBUG
-            printf("Adding right neighbour\n");
-
             // set position
             neighbourX = (ushort) (x + 1);
             neighbourY = y;
