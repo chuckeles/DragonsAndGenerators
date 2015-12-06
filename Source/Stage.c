@@ -20,14 +20,8 @@ Stage* CreateStages(char* map, ushort width, ushort height) {
   stages[0].tiles = strdup(map);
 
   // make the paths and directions
-  uint size = width * height;
-  stages[0].paths = malloc(size * sizeof(uchar));
-  stages[0].directions = malloc(size * sizeof(uchar));
-
-  for (i = 0; i < size; ++i) {
-    stages[0].paths[i] = 0;
-    stages[0].directions[i] = 0;
-  }
+  stages[0].paths = calloc(width * height, sizeof(uchar));
+  stages[0].directions = malloc(width * height * sizeof(uchar));
 
   // initialize history
   for (i = HistoryEmpty; i < HistoryAll; ++i) {
