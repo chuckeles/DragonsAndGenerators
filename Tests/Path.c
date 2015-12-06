@@ -209,9 +209,9 @@ START_TEST(SimplePathDragonPrincessTest)
   }
 
   // check the path in the dragon stage
-  for (i = 0; i < 3; ++i) {
-    ck_assert_int_eq(stages[HistoryDragon].paths[4 - i - 1], i + 4);
-    ck_assert_int_eq(stages[HistoryDragon].directions[4 - i - 1], 0);
+  for (i = 1; i < 4; ++i) {
+    ck_assert_int_eq(stages[HistoryDragon].paths[i], 7 - i);
+    ck_assert_int_eq(stages[HistoryDragon].directions[i], 0);
   }
 
   // check the path in the princess stage

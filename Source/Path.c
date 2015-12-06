@@ -173,6 +173,16 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
           ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, HistoryGenerator);
           break;
 
+        case 'p':
+          // check if the dragon is dead
+          if (entry.history & HistoryDragon) {
+            ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, HistoryPrincess0);
+          }
+          else {
+            ProcessTile(&heap, stage, entry, x, y, width, height);
+          }
+          break;
+
         default:
           ProcessTile(&heap, stage, entry, x, y, width, height);
           break;
