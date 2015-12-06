@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 #include "Heap.h"
@@ -130,9 +129,6 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
       ushort x = (ushort) MAKE_2D_X(entry.tile, width);
       ushort y = (ushort) MAKE_2D_Y(entry.tile, width);
 
-      // DEBUG
-      printf("Processing tile %c [%u, %u] in stage %u\n", stage->tiles[entry.tile], x, y, entry.history);
-
       // check the tile
       switch (stage->tiles[entry.tile]) {
         case 'd':
@@ -164,6 +160,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
             }
           }
           break;
+
         default:
           ProcessTile(&heap, stage, entry, x, y, width, height);
           break;
