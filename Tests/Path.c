@@ -62,6 +62,32 @@ START_TEST(SimplePathDragonTest)
 END_TEST
 
 /*
+ * Simple path-finding test with a single princess.
+ */
+START_TEST(SimplePathPrincessTest)
+{
+
+  // make stages
+  Stage* stages = CreateStages("ccpcc", 5, 1);
+
+  // get the path
+  uint length;
+  int* path = FindPath(stages, 5, 1, &length);
+
+  // check the path in the first stage
+  ushort i;
+  for (i = 0; i < 5; ++i) {
+    ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
+  }
+
+  // delete path and stages
+  DeletePath(path);
+  DeleteStages(stages);
+
+}
+END_TEST
+
+/*
  * Path-finding test case.
  */
 TCase* PathTCase() {
