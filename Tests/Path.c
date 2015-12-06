@@ -19,6 +19,7 @@ START_TEST(SimplePathTest)
   ushort i;
   for (i = 0; i < 5; ++i) {
     ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryEmpty].directions[i], 3);
   }
 
   // delete path and stages
@@ -47,11 +48,13 @@ START_TEST(SimplePathDragonTest)
   // check the path in the first stage
   for (i = 0; i < 3; ++i) {
     ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryEmpty].directions[i], 3);
   }
 
   // check the path in the dragon stage
   for (i = 2; i < 5; ++i) {
     ck_assert_int_eq(stages[HistoryDragon].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryDragon].directions[i], 3);
   }
 
   // delete path and stages
@@ -78,6 +81,7 @@ START_TEST(SimplePathPrincessTest)
   ushort i;
   for (i = 0; i < 5; ++i) {
     ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryEmpty].directions[i], 3);
   }
 
   // delete path and stages
