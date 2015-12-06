@@ -147,7 +147,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
             stage->directions[entry.tile] = entry.direction;
 
             // update history
-            entry.history &= HistoryDragon;
+            entry.history |= HistoryDragon;
 
             // get the new stage
             Stage* newStage = stages + entry.history;
