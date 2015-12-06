@@ -66,7 +66,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
     ushort y = (ushort) MAKE_2D_Y(entry.tile, width);
 
     // DEBUG
-    printf("Processing tile: %c\n", stage->tiles[entry.tile]);
+    printf("Processing tile %c [%u, %u] in stage %u\n", stage->tiles[entry.tile], x, y, entry.history);
 
     // check the tile
     switch (stage->tiles[entry.tile]) {
