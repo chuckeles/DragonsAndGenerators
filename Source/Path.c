@@ -94,6 +94,40 @@ inline void EnsureStageExists(Stage* stage, Stage* newStage, ushort width, ushor
 }
 
 /*
+ * Processes a tile that triggers a new stage.
+ */
+inline void ProcessStageTile(Stage* stages, Heap* heap, Stage* stage, HeapEntry entry,
+                             ushort x, ushort y, ushort width, ushort height, History addHistory) {
+  // check if already killed dragon
+  if (entry.history & addHistory) {
+    // just process
+    ProcessTile(heap, stage, entry, x, y, width, height);
+  }
+  else {
+    // update the tile
+    stage->paths[entry.tile] = entry.path;
+    stage->directions[entry.tile] = entry.direction;
+
+    // update history
+    entry.history |= addHistory;
+
+    // get the new stage
+    Stage* newStage = stages + entry.history;
+
+    // ensure the stage exists
+    EnsureStageExists(stage, newStage, width, height);
+
+    // get tile's existing path
+    uchar oldPath2 = newStage->paths[entry.tile];
+
+    // check the existing path
+    if (oldPath2 == 0 || oldPath2 > entry.path) {
+      ProcessTile(heap, newStage, entry, x, y, width, height);
+    }
+  }
+}
+
+/*
  * Definitions for path-finding functions.
  */
 
@@ -132,33 +166,11 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
       // check the tile
       switch (stage->tiles[entry.tile]) {
         case 'd':
-          // check if already killed dragon
-          if (entry.history & HistoryDragon) {
-            // just process
-            ProcessTile(&heap, stage, entry, x, y, width, height);
-          }
-          else {
-            // update the tile
-            stage->paths[entry.tile] = entry.path;
-            stage->directions[entry.tile] = entry.direction;
+          ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, HistoryDragon);
+          break;
 
-            // update history
-            entry.history |= HistoryDragon;
-
-            // get the new stage
-            Stage* newStage = stages + entry.history;
-
-            // ensure the stage exists
-            EnsureStageExists(stage, newStage, width, height);
-
-            // get tile's existing path
-            uchar oldPath2 = newStage->paths[entry.tile];
-
-            // check the existing path
-            if (oldPath2 == 0 || oldPath2 > entry.path) {
-              ProcessTile(&heap, newStage, entry, x, y, width, height);
-            }
-          }
+        case 'g':
+          ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, HistoryGenerator);
           break;
 
         default:
