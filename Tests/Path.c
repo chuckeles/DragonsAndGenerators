@@ -123,6 +123,70 @@ START_TEST(SimplePathDragonTest)
 END_TEST
 
 /*
+ * Simple path-finding test with a generator.
+ */
+START_TEST(SimplePathGeneratorTest)
+{
+
+  // bloody iterator
+  ushort i;
+
+  // make stages
+  Stage* stages = CreateStages("ccgcc", 5, 1);
+
+  // get the path
+  uint length;
+  int* path = FindPath(stages, 5, 1, &length);
+
+  // check the path in the first stage
+  for (i = 0; i < 3; ++i) {
+    ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
+  }
+
+  // check the path in the dragon stage
+  for (i = 2; i < 5; ++i) {
+    ck_assert_int_eq(stages[HistoryGenerator].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryGenerator].directions[i], 3);
+  }
+
+  // delete path and stages
+  DeletePath(path);
+  DeleteStages(stages);
+
+}
+END_TEST
+
+/*
+ * Simple path-finding test with a forest.
+ */
+START_TEST(SimplePathForestTest)
+{
+
+  // bloody iterator
+  ushort i;
+
+  // make stages
+  Stage* stages = CreateStages("hhhh", 4, 1);
+
+  // get the path
+  uint length;
+  int* path = FindPath(stages, 4, 1, &length);
+
+  // check the path in the first stage
+  for (i = 0; i < 4; ++i) {
+    ck_assert_int_eq(stages[HistoryEmpty].paths[i], (i + 1) * 2);
+    ck_assert_int_eq(stages[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
+  }
+
+  // delete path and stages
+  DeletePath(path);
+  DeleteStages(stages);
+
+}
+END_TEST
+
+/*
  * Path-finding test case.
  */
 TCase* PathTCase() {
@@ -135,6 +199,8 @@ TCase* PathTCase() {
   tcase_add_test(tcase, SimplePathObstacleTest);
   tcase_add_test(tcase, SimplePathPrincessTest);
   tcase_add_test(tcase, SimplePathDragonTest);
+  tcase_add_test(tcase, SimplePathGeneratorTest);
+  tcase_add_test(tcase, SimplePathForestTest);
 
   // return the test case
   return tcase;
