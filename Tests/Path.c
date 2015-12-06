@@ -128,9 +128,9 @@ TCase* PathTCase() {
 
   // add tests
   tcase_add_test(tcase, SimplePathTest);
-  tcase_add_test(tcase, SimplePathDragonTest);
-  tcase_add_test(tcase, SimplePathPrincessTest);
   tcase_add_test(tcase, SimplePathObstacleTest);
+  tcase_add_test(tcase, SimplePathPrincessTest);
+  tcase_add_test(tcase, SimplePathDragonTest);
 
   // return the test case
   return tcase;
