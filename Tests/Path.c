@@ -196,33 +196,53 @@ START_TEST(SimplePathDragonPrincessTest)
   ushort i;
 
   // make stages
-  Stage* stages = CreateStages("cpcdc", 5, 1);
+  Stage* stages0 = CreateStages("cpcdc", 5, 1);
+  Stage* stages1 = CreateStages("cqcdc", 5, 1);
+  Stage* stages2 = CreateStages("crcdc", 5, 1);
 
   // get the path
   uint length;
-  int* path = FindPath(stages, 5, 1, &length);
+  int* path0 = FindPath(stages0, 5, 1, &length);
+  int* path1 = FindPath(stages1, 5, 1, &length);
+  int* path2 = FindPath(stages2, 5, 1, &length);
 
   // check the path in the first stage
   for (i = 0; i < 4; ++i) {
-    ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
-    ck_assert_int_eq(stages[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
+    ck_assert_int_eq(stages0[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages0[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
+    ck_assert_int_eq(stages1[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages1[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
+    ck_assert_int_eq(stages2[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages2[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
   }
 
   // check the path in the dragon stage
   for (i = 1; i < 4; ++i) {
-    ck_assert_int_eq(stages[HistoryDragon].paths[i], 7 - i);
-    ck_assert_int_eq(stages[HistoryDragon].directions[i], i < 3 ? 0 : 3);
+    ck_assert_int_eq(stages0[HistoryDragon].paths[i], 7 - i);
+    ck_assert_int_eq(stages0[HistoryDragon].directions[i], i < 3 ? 0 : 3);
+    ck_assert_int_eq(stages1[HistoryDragon].paths[i], 7 - i);
+    ck_assert_int_eq(stages1[HistoryDragon].directions[i], i < 3 ? 0 : 3);
+    ck_assert_int_eq(stages2[HistoryDragon].paths[i], 7 - i);
+    ck_assert_int_eq(stages2[HistoryDragon].directions[i], i < 3 ? 0 : 3);
   }
 
   // check the path in the princess stage
   for (i = 1; i < 5; ++i) {
-    ck_assert_int_eq(stages[HistoryDragon | HistoryPrincess0].paths[i], i + 5);
-    ck_assert_int_eq(stages[HistoryDragon | HistoryPrincess0].directions[i], i > 1 ? 3 : 0);
+    ck_assert_int_eq(stages0[HistoryDragon | HistoryPrincess0].paths[i], i + 5);
+    ck_assert_int_eq(stages0[HistoryDragon | HistoryPrincess0].directions[i], i > 1 ? 3 : 0);
+    ck_assert_int_eq(stages1[HistoryDragon | HistoryPrincess1].paths[i], i + 5);
+    ck_assert_int_eq(stages1[HistoryDragon | HistoryPrincess1].directions[i], i > 1 ? 3 : 0);
+    ck_assert_int_eq(stages2[HistoryDragon | HistoryPrincess2].paths[i], i + 5);
+    ck_assert_int_eq(stages2[HistoryDragon | HistoryPrincess2].directions[i], i > 1 ? 3 : 0);
   }
 
   // delete path and stages
-  DeletePath(path);
-  DeleteStages(stages);
+  DeletePath(path2);
+  DeletePath(path1);
+  DeletePath(path0);
+  DeleteStages(stages2);
+  DeleteStages(stages1);
+  DeleteStages(stages0);
 
 }
 END_TEST

@@ -28,6 +28,17 @@
   }
 
 /*
+ * Another weird macro to prevent code duplication/
+ */
+#define PROCESS_PRINCESS(hist) \
+  if (entry.history & HistoryDragon) { \
+    ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, hist); \
+  } \
+  else { \
+    ProcessTile(&heap, stage, entry, x, y, width, height); \
+  }
+
+/*
  * Processes a tile. Updates it and pushes the neighbours.
  */
 inline void ProcessTile(Heap* heap, Stage* stage, HeapEntry entry, ushort x, ushort y, ushort width, ushort height) {
@@ -174,13 +185,13 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
           break;
 
         case 'p':
-          // check if the dragon is dead
-          if (entry.history & HistoryDragon) {
-            ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, HistoryPrincess0);
-          }
-          else {
-            ProcessTile(&heap, stage, entry, x, y, width, height);
-          }
+          PROCESS_PRINCESS(HistoryPrincess0)
+          break;
+        case 'q':
+          PROCESS_PRINCESS(HistoryPrincess1)
+          break;
+        case 'r':
+          PROCESS_PRINCESS(HistoryPrincess2)
           break;
 
         default:
