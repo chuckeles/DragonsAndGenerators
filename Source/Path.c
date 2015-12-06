@@ -12,6 +12,28 @@
 #define MAKE_2D_Y(i, width) (i / width)
 
 /*
+ * Helpful macro for adding neighbours to avoid duplicate code.
+ */
+#define PUSH_NEIGHBOUR \
+  // check if it is not an obstacle \
+  ushort tile = MAKE_1D(neighbourX, neighbourY, width); \
+  char tileChar = stage->tiles[tile]; \
+  if (tileChar != 'n') { \
+    // set the entry \
+    neighbour. \
+    path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1)); \
+    neighbour. \
+    direction = 0; \
+    neighbour. \
+    history = entry.history; \
+    neighbour. \
+    tile = tile; \
+    \
+    // add to the heap \
+    HeapPush(&heap, neighbour); \
+  }
+
+/*
  * Definitions for path-finding functions.
  */
 
@@ -62,24 +84,40 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
           ushort neighbourX;
           ushort neighbourY;
 
+          // left
           if (x > 0) {
             // set position
             neighbourX = (ushort) (x - 1);
             neighbourY = y;
 
-            // check if it is not an obstacle
-            ushort tile = MAKE_1D(neighbourX, neighbourY, width);
-            char tileChar = stage->tiles[tile];
-            if (tileChar != 'n') {
-              // set the entry
-              neighbour.path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1));
-              neighbour.direction = 0;
-              neighbour.history = entry.history;
-              neighbour.tile = tile;
+            PUSH_NEIGHBOUR
+          }
 
-              // add to the heap
-              HeapPush(&heap, neighbour);
-            }
+          // up
+          if (y > 0) {
+            // set position
+            neighbourX = x;
+            neighbourY = (ushort) (y - 1);
+
+            PUSH_NEIGHBOUR
+          }
+
+          // down
+          if (y < height - 1) {
+            // set position
+            neighbourX = x;
+            neighbourY = (ushort) (y + 1);
+
+            PUSH_NEIGHBOUR
+          }
+
+          // right
+          if (x < width - 1) {
+            // set position
+            neighbourX = (ushort) (x + 1);
+            neighbourY = y;
+
+            PUSH_NEIGHBOUR
           }
         }
 
