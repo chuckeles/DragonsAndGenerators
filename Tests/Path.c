@@ -33,31 +33,31 @@ END_TEST
  * Simple path-finding test with an obstacle.
  */
 START_TEST(SimplePathObstacleTest)
-  {
+{
 
-    // bloody iterator
-    ushort i;
+  // bloody iterator
+  ushort i;
 
-    // make stages
-    Stage* stages = CreateStages("ccncc", 5, 1);
+  // make stages
+  Stage* stages = CreateStages("ccncc", 5, 1);
 
-    // get the path
-    uint length;
-    int* path = FindPath(stages, 5, 1, &length);
+  // get the path
+  uint length;
+  int* path = FindPath(stages, 5, 1, &length);
 
-    // check the path in the first stage
-    for (i = 0; i < 2; ++i) {
-      ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
-    }
-    for (i = 2; i < 5; ++i) {
-      ck_assert_int_eq(stages[HistoryEmpty].paths[i], 0);
-    }
-
-    // delete path and stages
-    DeletePath(path);
-    DeleteStages(stages);
-
+  // check the path in the first stage
+  for (i = 0; i < 2; ++i) {
+    ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
   }
+  for (i = 2; i < 5; ++i) {
+    ck_assert_int_eq(stages[HistoryEmpty].paths[i], 0);
+  }
+
+  // delete path and stages
+  DeletePath(path);
+  DeleteStages(stages);
+
+}
 END_TEST
 
 /*
@@ -91,35 +91,35 @@ END_TEST
  * Simple path-finding test with a dragon.
  */
 START_TEST(SimplePathDragonTest)
-  {
+{
 
-    // bloody iterator
-    ushort i;
+  // bloody iterator
+  ushort i;
 
-    // make stages
-    Stage* stages = CreateStages("ccdcc", 5, 1);
+  // make stages
+  Stage* stages = CreateStages("ccdcc", 5, 1);
 
-    // get the path
-    uint length;
-    int* path = FindPath(stages, 5, 1, &length);
+  // get the path
+  uint length;
+  int* path = FindPath(stages, 5, 1, &length);
 
-    // check the path in the first stage
-    for (i = 0; i < 3; ++i) {
-      ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
-      ck_assert_int_eq(stages[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
-    }
-
-    // check the path in the dragon stage
-    for (i = 2; i < 5; ++i) {
-      ck_assert_int_eq(stages[HistoryDragon].paths[i], i + 1);
-      ck_assert_int_eq(stages[HistoryDragon].directions[i], 3);
-    }
-
-    // delete path and stages
-    DeletePath(path);
-    DeleteStages(stages);
-
+  // check the path in the first stage
+  for (i = 0; i < 3; ++i) {
+    ck_assert_int_eq(stages[HistoryEmpty].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryEmpty].directions[i], i > 0 ? 3 : 0);
   }
+
+  // check the path in the dragon stage
+  for (i = 2; i < 5; ++i) {
+    ck_assert_int_eq(stages[HistoryDragon].paths[i], i + 1);
+    ck_assert_int_eq(stages[HistoryDragon].directions[i], 3);
+  }
+
+  // delete path and stages
+  DeletePath(path);
+  DeleteStages(stages);
+
+}
 END_TEST
 
 /*
