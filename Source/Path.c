@@ -156,7 +156,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
             EnsureStageExists(stage, newStage, width, height);
 
             // get tile's existing path
-            uchar oldPath2 = stage->paths[entry.tile];
+            uchar oldPath2 = newStage->paths[entry.tile];
 
             // check the existing path
             if (oldPath2 == 0 || oldPath2 > entry.path) {
