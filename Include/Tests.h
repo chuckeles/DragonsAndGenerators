@@ -9,5 +9,6 @@
 TCase* HistoryTCase();
 TCase* HeapTCase();
 TCase* StageTCase();
+TCase* PathTCase();
 
 #endif
