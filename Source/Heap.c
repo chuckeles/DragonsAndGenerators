@@ -124,7 +124,7 @@ HeapEntry HeapPop(Heap* heap) {
         R = left;
       }
       else {
-        if (CompareEntries(left, P) < 0) {
+        if (CompareEntries(right, P) < 0) {
           // move the right child
           heap->array[Ri] = right;
           Ri = RIGHT(Ri);
