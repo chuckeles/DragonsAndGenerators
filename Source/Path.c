@@ -278,6 +278,11 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
       result[(*length)++] = MAKE_2D_Y(finishEntry.tile, width);
       result[(*length)++] = MAKE_2D_X(finishEntry.tile, width);
 
+      // weird trick if the [0, 0] changes the stage
+      if (finishEntry.history == HistoryEmpty && finishEntry.tile == 0) {
+        break;
+      }
+
       // move to the next tile
       switch (finishEntry.direction) {
         case 0:
@@ -301,11 +306,21 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
       }
     }
 
-    // add the [0, 0] position
-    result[(*length)++] = 0;
-    result[(*length)++] = 0;
+    // add the [0, 0] position if not already there
+    if (result[(*length) - 1] != 0 && result[(*length) - 2] != 0) {
+      result[(*length)++] = 0;
+      result[(*length)++] = 0;
+    }
 
-    // 2 coords for 1 tile
+    // flip the array
+    uint i;
+    for (i = 0; i < (*length) / 2; ++i) {
+      result[i] ^= result[*length - i - 1];
+      result[*length - i - 1] ^= result[i];
+      result[i] ^= result[*length - i - 1];
+    }
+
+    // 2 coordinates for 1 tile
     *length /= 2;
 
     // return the result
