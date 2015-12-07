@@ -247,6 +247,10 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
     // reset length
     *length = 0;
 
+    // position for later
+    ushort x;
+    ushort y;
+
     // iterate tiles and add them to the array
     while (finishEntry.history != HistoryEmpty || finishEntry.tile > 0) {
       // check if we need to change the stage
@@ -285,22 +289,30 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
       // move to the next tile
       switch (finishEntry.direction) {
         case 0:
-          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width) + 1, MAKE_2D_Y(finishEntry.tile, width), width);
+          x = (ushort) (MAKE_2D_X(finishEntry.tile, width) + 1);
+          y = (ushort) MAKE_2D_Y(finishEntry.tile, width);
+          finishEntry.tile = MAKE_1D(x, y, width);
           finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
         case 1:
-          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width), MAKE_2D_Y(finishEntry.tile, width) + 1, width);
+          x = (ushort) MAKE_2D_X(finishEntry.tile, width);
+          y = (ushort) (MAKE_2D_Y(finishEntry.tile, width) + 1);
+          finishEntry.tile = MAKE_1D(x, y, width);
           finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
         case 2:
-          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width), MAKE_2D_Y(finishEntry.tile, width) - 1, width);
+          x = (ushort) MAKE_2D_X(finishEntry.tile, width);
+          y = (ushort) (MAKE_2D_Y(finishEntry.tile, width) - 1);
+          finishEntry.tile = MAKE_1D(x, y, width);
           finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
         case 3:
-          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width) - 1, MAKE_2D_Y(finishEntry.tile, width), width);
+          x = (ushort) (MAKE_2D_X(finishEntry.tile, width) - 1);
+          y = (ushort) MAKE_2D_Y(finishEntry.tile, width);
+          finishEntry.tile = MAKE_1D(x, y, width);
           finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
@@ -310,7 +322,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
     }
 
     // add the [0, 0] position if not already there
-    if (result[(*length) - 1] != 0 && result[(*length) - 2] != 0) {
+    if (result[(*length) - 1] != 0 || result[(*length) - 2] != 0) {
       result[(*length)++] = 0;
       result[(*length)++] = 0;
     }
