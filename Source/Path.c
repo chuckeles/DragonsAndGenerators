@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "Heap.h"
 #include "Path.h"
@@ -32,7 +33,9 @@
  */
 #define PROCESS_PRINCESS(hist) \
   if (entry.history & HistoryDragon) { \
-    ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, hist); \
+    if (ProcessStageTile(stages, &heap, stage, entry, x, y, width, height, hist)) { \
+      finish = 1; \
+    } \
   } \
   else { \
     ProcessTile(&heap, stage, entry, x, y, width, height); \
@@ -107,8 +110,18 @@ inline void EnsureStageExists(Stage* stage, Stage* newStage, ushort width, ushor
 /*
  * Processes a tile that triggers a new stage.
  */
-inline void ProcessStageTile(Stage* stages, Heap* heap, Stage* stage, HeapEntry entry,
+inline ushort ProcessStageTile(Stage* stages, Heap* heap, Stage* stage, HeapEntry entry,
                              ushort x, ushort y, ushort width, ushort height, History addHistory) {
+  // check if the result is the finish
+  if (((entry.history | addHistory) & HistoryFinish) == HistoryFinish) {
+    // update the tile
+    stage->paths[entry.tile] = entry.path;
+    stage->directions[entry.tile] = entry.direction;
+
+    // done!
+    return 1;
+  }
+
   // check if already on the required stage
   if (entry.history & addHistory) {
     // just process
@@ -136,6 +149,9 @@ inline void ProcessStageTile(Stage* stages, Heap* heap, Stage* stage, HeapEntry 
       ProcessTile(heap, newStage, entry, x, y, width, height);
     }
   }
+
+  return 0;
+
 }
 
 /*
@@ -156,6 +172,9 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
   // push it to the heap
   HeapPush(&heap, firstTile);
+
+  // whether the finish has already been found
+  ushort finish = 0;
 
   // loop until we find the path or run out of tiles
   while (heap.size > 0) {
@@ -197,6 +216,12 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
         default:
           ProcessTile(&heap, stage, entry, x, y, width, height);
           break;
+      }
+
+      // found all princesses?
+      if (finish) {
+        // stop the search
+        break;
       }
     }
   }
