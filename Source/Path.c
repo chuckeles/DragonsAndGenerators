@@ -42,6 +42,14 @@
   }
 
 /*
+ * And another for clearing bits in history.
+ */
+#define CLEAR_BIT(entry, hist) \
+  if (entry.history & hist) { \
+    entry.history &= ~hist;\
+  }
+
+/*
  * Processes a tile. Updates it and pushes the neighbours.
  */
 inline void ProcessTile(Heap* heap, Stage* stage, HeapEntry entry, ushort x, ushort y, ushort width, ushort height) {
@@ -175,6 +183,8 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
   // whether the finish has already been found
   ushort finish = 0;
+  HeapEntry finishEntry;
+  finishEntry.history = HistoryEmpty;
 
   // loop until we find the path or run out of tiles
   while (heap.size > 0) {
@@ -221,6 +231,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
       // found all princesses?
       if (finish) {
         // stop the search
+        finishEntry = entry;
         break;
       }
     }
@@ -228,6 +239,78 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
   // delete the heap
   DeleteHeap(heap);
+
+  // if finished
+  if (finish) {
+    // make an array for the path
+    int* result = malloc(finishEntry.path * sizeof(int));
+
+    // reset length
+    *length = 0;
+
+    // iterate tiles and add them to the array
+    while (finishEntry.history != HistoryEmpty || finishEntry.tile > 0) {
+      // check if we need to change the stage
+      switch (stages[finishEntry.history].tiles[finishEntry.tile]) {
+        case 'd':
+          CLEAR_BIT(finishEntry, HistoryDragon)
+          break;
+
+        case 'g':
+          CLEAR_BIT(finishEntry, HistoryGenerator)
+          break;
+
+        case 'p':
+          CLEAR_BIT(finishEntry, HistoryPrincess0)
+          break;
+        case 'q':
+          CLEAR_BIT(finishEntry, HistoryPrincess1)
+          break;
+        case 'r':
+          CLEAR_BIT(finishEntry, HistoryPrincess2)
+          break;
+
+        // CLion... this is useless...
+        default:break;
+      }
+
+      // add the position
+      result[(*length)++] = MAKE_2D_Y(finishEntry.tile, width);
+      result[(*length)++] = MAKE_2D_X(finishEntry.tile, width);
+
+      // move to the next tile
+      switch (finishEntry.direction) {
+        case 0:
+          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width) + 1, MAKE_2D_Y(finishEntry.tile, width), width);
+          break;
+
+        case 1:
+          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width), MAKE_2D_Y(finishEntry.tile, width) + 1, width);
+          break;
+
+        case 2:
+          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width), MAKE_2D_Y(finishEntry.tile, width) - 1, width);
+          break;
+
+        case 3:
+          finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width) - 1, MAKE_2D_Y(finishEntry.tile, width), width);
+          break;
+
+        // CLion... this is useless...
+        default:break;
+      }
+    }
+
+    // add the [0, 0] position
+    result[(*length)++] = 0;
+    result[(*length)++] = 0;
+
+    // 2 coords for 1 tile
+    *length /= 2;
+
+    // return the result
+    return result;
+  }
 
   return NULL;
 
