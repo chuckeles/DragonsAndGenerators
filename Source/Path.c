@@ -286,18 +286,22 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
       switch (finishEntry.direction) {
         case 0:
           finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width) + 1, MAKE_2D_Y(finishEntry.tile, width), width);
+          finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
         case 1:
           finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width), MAKE_2D_Y(finishEntry.tile, width) + 1, width);
+          finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
         case 2:
           finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width), MAKE_2D_Y(finishEntry.tile, width) - 1, width);
+          finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
         case 3:
           finishEntry.tile = MAKE_1D(MAKE_2D_X(finishEntry.tile, width) - 1, MAKE_2D_Y(finishEntry.tile, width), width);
+          finishEntry.direction = stages[finishEntry.history].directions[finishEntry.tile];
           break;
 
         // CLion... this is useless...
