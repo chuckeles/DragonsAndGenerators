@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 #include "Heap.h"
 #include "Path.h"
@@ -243,7 +242,7 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
   // if finished
   if (finish) {
     // make an array for the path
-    int* result = malloc(finishEntry.path * sizeof(int));
+    int* result = malloc(finishEntry.path * 2 * sizeof(int));
 
     // reset length
     *length = 0;
@@ -315,12 +314,12 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
     // flip the array
     uint i;
     for (i = 0; i < (*length) / 2; ++i) {
-      result[i] ^= result[*length - i - 1];
-      result[*length - i - 1] ^= result[i];
-      result[i] ^= result[*length - i - 1];
+      result[i] ^= result[(*length) - i - 1];
+      result[(*length) - i - 1] ^= result[i];
+      result[i] ^= result[(*length) - i - 1];
     }
 
-    // 2 coordinates for 1 tile
+    // 2 coords for 1 tile
     *length /= 2;
 
     // return the result

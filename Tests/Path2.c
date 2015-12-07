@@ -12,7 +12,7 @@ START_TEST(PathResultTest)
 
   // find the path
   uint length;
-  int* path = FindPath(stages, 4, 1,&length);
+  int* path = FindPath(stages, 4, 1, &length);
 
   // check the length
   ck_assert_int_eq(length, 4);
