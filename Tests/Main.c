@@ -18,12 +18,14 @@ int main() {
   TCase* heapCase = HeapTCase();
   TCase* stageCase = StageTCase();
   TCase* pathCase = PathTCase();
+  TCase* path2Case = Path2TCase();
 
   // add test cases to suite
   suite_add_tcase(suite, historyCase);
   suite_add_tcase(suite, heapCase);
   suite_add_tcase(suite, stageCase);
   suite_add_tcase(suite, pathCase);
+  suite_add_tcase(suite, path2Case);
 
   // create a runner
   SRunner* srunner = srunner_create(suite);
