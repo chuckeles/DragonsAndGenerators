@@ -24,6 +24,22 @@ int* zachran_princezne(char** mapa, int n, int m, int t, int* dlzka_cesty) {
     strcpy(mapArray + i * m, mapa[i]);
   }
 
+  // change the princesses from ppp to pqr
+  uint princessCount = 0;
+  for (i = 0; i < n * m; ++i) {
+    if (mapArray[i] == 'p') {
+      ++ princessCount;
+
+      if (princessCount > 2) {
+        mapArray[i] = 'r';
+        break;
+      }
+      else if (princessCount > 1) {
+        mapArray[i] = 'q';
+      }
+    }
+  }
+
   // create the stages
   Stage* stages = CreateStages(mapArray, (ushort) m, (ushort) n);
 
