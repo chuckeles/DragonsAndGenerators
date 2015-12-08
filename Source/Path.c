@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 
 #include "Heap.h"
 #include "Path.h"
@@ -109,7 +108,7 @@ inline void EnsureStageExists(Stage* stage, Stage* newStage, ushort width, ushor
 
   // check if it doesn't exist
   if (newStage->tiles == NULL) {
-    newStage->tiles = strdup(stage->tiles);
+    newStage->tiles = stage->tiles;
     newStage->paths = calloc(width * height, sizeof(uchar));
     newStage->directions = malloc(width * height * sizeof(uchar));
   }

@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 
 #include "History.h"
 #include "Stage.h"
@@ -17,7 +16,7 @@ Stage* CreateStages(char* map, ushort width, ushort height) {
   Stage* stages = calloc(HistoryAll - 1, sizeof(Stage));
 
   // initialize the first stage's tiles
-  stages[0].tiles = strdup(map);
+  stages[0].tiles = map;
 
   // make the paths and directions
   stages[0].paths = calloc(width * height, sizeof(uchar));
