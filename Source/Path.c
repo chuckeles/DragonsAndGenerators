@@ -169,10 +169,6 @@ inline void ProcessStation(Heap* heap, Stage* stage, HeapEntry entry, ushort x, 
 
   // check the generator
   if (entry.history & HistoryGenerator) {
-    // update the tile
-    stage->paths[entry.tile] = entry.path;
-    stage->directions[entry.tile] = entry.direction;
-
     // make a copy
     HeapEntry stationEntry = entry;
     stationEntry.path += 1;
@@ -193,10 +189,9 @@ inline void ProcessStation(Heap* heap, Stage* stage, HeapEntry entry, ushort x, 
       }
     }
   }
-  else {
-    // just process
-    ProcessTile(heap, stage, entry, x, y, width, height);
-  }
+
+  // then process as a regular tile
+  ProcessTile(heap, stage, entry, x, y, width, height);
 
 }
 
