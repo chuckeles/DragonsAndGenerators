@@ -5,7 +5,6 @@
  */
 
 #include <stdlib.h>
-#include <string.h>
 
 #include "Path.h"
 
@@ -16,26 +15,32 @@
 int* zachran_princezne(char** mapa, int n, int m, int t, int* dlzka_cesty) {
 
   // make an array for the map
-  char* mapArray = malloc((n * m + 1) * sizeof(char));
+  char* mapArray = malloc(n * m  * sizeof(char));
 
   // copy the map
-  uint i;
-  for (i = 0; i < n; ++i) {
-    strcpy(mapArray + i * m, mapa[i]);
-  }
-
-  // change the princesses from ppp to pqr
+  uint i, j;
   uint princessCount = 0;
-  for (i = 0; i < n * m; ++i) {
-    if (mapArray[i] == 'p') {
-      ++ princessCount;
+  for (i = 0; i < n; ++i) {
+    for (j = 0; j < m; ++j) {
+      // check if it is a princess
+      if (mapa[i][j] == 'p') {
+        // yep, change to pqr
+        ++princessCount;
 
-      if (princessCount > 2) {
-        mapArray[i] = 'r';
-        break;
+        if (princessCount > 2) {
+          mapArray[i * m + j] = 'r';
+          break;
+        }
+        else if (princessCount > 1) {
+          mapArray[i * m + j] = 'q';
+        }
+        else {
+          mapArray[i * m + j] = 'p';
+        }
       }
-      else if (princessCount > 1) {
-        mapArray[i] = 'q';
+      else {
+        // nope, just copy
+        mapArray[i * m + j] = mapa[i][j];
       }
     }
   }
