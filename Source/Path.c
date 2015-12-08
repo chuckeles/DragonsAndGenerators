@@ -171,7 +171,6 @@ inline void ProcessStation(Heap* heap, Stage* stage, HeapEntry entry, ushort x, 
   if (entry.history & HistoryGenerator) {
     // make a copy
     HeapEntry stationEntry = entry;
-    stationEntry.path += 1;
 
     // find all the stations and push them
     uint i;
@@ -185,6 +184,9 @@ inline void ProcessStation(Heap* heap, Stage* stage, HeapEntry entry, ushort x, 
       if (stage->tiles[i] == stage->tiles[entry.tile] && (stage->paths[i] == 0 || stage->paths[i] >= stationEntry.path)) {
         // set tile and push
         stationEntry.tile = i;
+        stationEntry.path = (uchar) (entry.path +
+            (abs(MAKE_2D_X(i, width) - MAKE_2D_X(entry.tile, width)) +
+                abs(MAKE_2D_Y(i, width) - MAKE_2D_Y(entry.tile, width)) + 3) / 4);
         HeapPush(heap, stationEntry);
       }
     }
@@ -340,7 +342,10 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
 
             // check if it is 'THE ONE AND ONLY'
             if (stages[finishEntry.history].tiles[i] == stages[finishEntry.history].tiles[finishEntry.tile] &&
-                stages[finishEntry.history].paths[i] == stages[finishEntry.history].paths[finishEntry.tile] - 1) {
+                stages[finishEntry.history].paths[i] == stages[finishEntry.history].paths[finishEntry.tile] -
+                                                        (abs(MAKE_2D_X(i, width) - MAKE_2D_X(finishEntry.tile, width)) +
+                                                         abs(MAKE_2D_Y(i, width) - MAKE_2D_Y(finishEntry.tile, width)) +
+                                                         3) / 4) {
               // will you marry me sweetie?
               result[(*length)++] = MAKE_2D_Y(finishEntry.tile, width);
               result[(*length)++] = MAKE_2D_X(finishEntry.tile, width);
