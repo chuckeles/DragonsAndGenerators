@@ -121,6 +121,29 @@ START_TEST(StandardPathTest1)
 END_TEST
 
 /*
+ * Standard test #2.
+ */
+START_TEST(StandardPathTest2)
+{
+
+  // create stages
+  Stage* stages = CreateStages("ccchhphcchhhchhchchhdhhhchhchchhccqhchhhhhcrhchhh", 7, 7);
+
+  // find the path
+  uint length = 0;
+  int* path = FindPath(stages, 7, 7, &length);
+
+  // check the length
+  ck_assert_int_eq(length, 16);
+
+  // delete path and stages
+  DeletePath(path);
+  DeleteStages(stages);
+
+}
+END_TEST
+
+/*
  * Path-finding test case.
  */
 TCase* Path2TCase() {
@@ -133,6 +156,7 @@ TCase* Path2TCase() {
   tcase_add_test(tcase, PathResultLongerTest);
   tcase_add_test(tcase, PathDirectionTest);
   tcase_add_test(tcase, StandardPathTest1);
+  tcase_add_test(tcase, StandardPathTest2);
 
   // return the test case
   return tcase;
