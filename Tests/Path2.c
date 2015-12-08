@@ -85,16 +85,10 @@ START_TEST(PathDirectionTest)
   // check the path
   ck_assert_int_eq(path[0], 0);
   ck_assert_int_eq(path[1], 0);
-  ck_assert_int_eq(path[2], 0);
-  ck_assert_int_eq(path[3], 1);
   ck_assert_int_eq(path[4], 1);
   ck_assert_int_eq(path[5], 1);
-  ck_assert_int_eq(path[6], 1);
-  ck_assert_int_eq(path[7], 2);
   ck_assert_int_eq(path[8], 2);
   ck_assert_int_eq(path[9], 2);
-  ck_assert_int_eq(path[10], 2);
-  ck_assert_int_eq(path[11], 1);
 
   // delete path and stages
   DeletePath(path);
