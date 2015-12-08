@@ -320,6 +320,37 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
           CLEAR_BIT(finishEntry, HistoryPrincess2)
           break;
 
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9': {
+          // need to find the station we came from
+          uint i = 0;
+          for (i = 0; i < width * height; ++i) {
+            // skip this station
+            if (i == finishEntry.tile) {
+              continue;
+            }
+
+            // check if it is 'THE ONE AND ONLY'
+            if (stages[finishEntry.history].tiles[i] == stages[finishEntry.history].tiles[finishEntry.tile] &&
+                stages[finishEntry.history].paths[i] == stages[finishEntry.history].paths[finishEntry.tile] - 1) {
+              // will you marry me sweetie?
+              result[(*length)++] = MAKE_2D_Y(finishEntry.tile, width);
+              result[(*length)++] = MAKE_2D_X(finishEntry.tile, width);
+              finishEntry.tile = i;
+              break;
+            }
+          }
+        }
+          break;
+
         // CLion... this is useless...
         default:break;
       }
