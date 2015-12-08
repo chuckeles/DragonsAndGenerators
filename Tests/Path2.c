@@ -98,6 +98,35 @@ START_TEST(PathDirectionTest)
 END_TEST
 
 /*
+ * Path-finding test with a generator and stations.
+ */
+START_TEST(PathStationTest)
+  {
+
+    // create stages
+    Stage* stages = CreateStages("qc0hh0dpqr", 10, 1);
+
+    // find the path
+    uint length;
+    int* path = FindPath(stages, 10, 1, &length);
+
+    // check the length
+    ck_assert_int_eq(length, 8);
+
+    // check the path
+    ck_assert_int_eq(path[4], 2);
+    ck_assert_int_eq(path[5], 0);
+    ck_assert_int_eq(path[6], 5);
+    ck_assert_int_eq(path[7], 0);
+
+    // delete path and stages
+    DeletePath(path);
+    DeleteStages(stages);
+
+  }
+END_TEST
+
+/*
  * Standard test #1.
  */
 START_TEST(StandardPathTest1)
@@ -155,6 +184,7 @@ TCase* Path2TCase() {
   tcase_add_test(tcase, PathResultTest);
   tcase_add_test(tcase, PathResultLongerTest);
   tcase_add_test(tcase, PathDirectionTest);
+  tcase_add_test(tcase, PathStationTest);
   tcase_add_test(tcase, StandardPathTest1);
   tcase_add_test(tcase, StandardPathTest2);
 
