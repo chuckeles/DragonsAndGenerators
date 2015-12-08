@@ -20,8 +20,8 @@ int* zachran_princezne(char** mapa, int n, int m, int t, int* dlzka_cesty) {
 
   // copy the map
   uint i;
-  for (i = 0; i < m; ++i) {
-    strcpy(mapArray + i * n, mapa[i]);
+  for (i = 0; i < n; ++i) {
+    strcpy(mapArray + i * m, mapa[i]);
   }
 
   // change the princesses from ppp to pqr
@@ -41,10 +41,10 @@ int* zachran_princezne(char** mapa, int n, int m, int t, int* dlzka_cesty) {
   }
 
   // create the stages
-  Stage* stages = CreateStages(mapArray, (ushort) n, (ushort) m);
+  Stage* stages = CreateStages(mapArray, (ushort) m, (ushort) n);
 
   // get the path
-  int* path = FindPath(stages, (ushort) n, (ushort) m, (uint*) dlzka_cesty);
+  int* path = FindPath(stages, (ushort) m, (ushort) n, (uint*) dlzka_cesty);
 
   // delete all the stuff
   DeleteStages(stages);
