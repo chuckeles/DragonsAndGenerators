@@ -104,7 +104,7 @@ START_TEST(PathStationTest)
   {
 
     // create stages
-    Stage* stages = CreateStages("qc0hh0dpqr", 10, 1);
+    Stage* stages = CreateStages("gc0hh0dpqr", 10, 1);
 
     // find the path
     uint length;
