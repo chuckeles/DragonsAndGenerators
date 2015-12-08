@@ -169,6 +169,10 @@ inline void ProcessStation(Heap* heap, Stage* stage, HeapEntry entry, ushort x, 
 
   // check the generator
   if (entry.history & HistoryGenerator) {
+    // update the tile
+    stage->paths[entry.tile] = entry.path;
+    stage->directions[entry.tile] = entry.direction;
+
     // make a copy
     HeapEntry stationEntry = entry;
     stationEntry.path += 1;
@@ -181,8 +185,8 @@ inline void ProcessStation(Heap* heap, Stage* stage, HeapEntry entry, ushort x, 
         continue;
       }
 
-      // check if it is the same station
-      if (stage->tiles[i] == stage->tiles[entry.tile]) {
+      // check if it is the same station and the path would be shorter
+      if (stage->tiles[i] == stage->tiles[entry.tile] && (stage->paths[i] == 0 || stage->paths[i] >= stationEntry.path)) {
         // set tile and push
         stationEntry.tile = i;
         HeapPush(heap, stationEntry);
