@@ -20,6 +20,7 @@ int* zachran_princezne(char** mapa, int n, int m, int t, int* dlzka_cesty) {
   // copy the map
   uint i, j;
   uint princessCount = 0;
+  
   for (i = 0; i < n; ++i) {
     for (j = 0; j < m; ++j) {
       // check if it is a princess
@@ -29,7 +30,6 @@ int* zachran_princezne(char** mapa, int n, int m, int t, int* dlzka_cesty) {
 
         if (princessCount > 2) {
           mapArray[i * m + j] = 'r';
-          break;
         }
         else if (princessCount > 1) {
           mapArray[i * m + j] = 'q';
