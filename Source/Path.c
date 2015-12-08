@@ -44,7 +44,9 @@
  * And another for clearing bits in history.
  */
 #define CLEAR_BIT(entry, hist) \
-  if (entry.history & hist) { \
+  if (entry.history & hist && stages[entry.history & ~hist].tiles != NULL && \
+      stages[entry.history].paths[entry.tile] == stages[entry.history & ~hist].paths[entry.tile] && \
+      stages[entry.history].directions[entry.tile] == stages[entry.history & ~hist].directions[entry.tile]) { \
     entry.history &= ~hist;\
   }
 
