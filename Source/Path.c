@@ -163,6 +163,40 @@ inline ushort ProcessStageTile(Stage* stages, Heap* heap, Stage* stage, HeapEntr
 }
 
 /*
+ * Processes a station.
+ */
+inline void ProcessStation(Heap* heap, Stage* stage, HeapEntry entry, ushort x, ushort y, ushort width, ushort height) {
+
+  // check the generator
+  if (entry.history & HistoryGenerator) {
+    // make a copy
+    HeapEntry stationEntry = entry;
+    stationEntry.path += 1;
+
+    // find all the stations and push them
+    uint i;
+    for (i = 0; i < width * height; ++i) {
+      // skip the original station
+      if (i == entry.tile) {
+        continue;
+      }
+
+      // check if it is the same station
+      if (stage->tiles[i] == stage->tiles[entry.tile]) {
+        // set tile and push
+        stationEntry.tile = i;
+        HeapPush(heap, stationEntry);
+      }
+    }
+  }
+  else {
+    // just process
+    ProcessTile(heap, stage, entry, x, y, width, height);
+  }
+
+}
+
+/*
  * Definitions for path-finding functions.
  */
 
@@ -221,6 +255,19 @@ int* FindPath(Stage* stages, ushort width, ushort height, uint* length) {
           break;
         case 'r':
           PROCESS_PRINCESS(HistoryPrincess2)
+          break;
+
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+          ProcessStation(&heap, stage, entry, x, y, width, height);
           break;
 
         default:
