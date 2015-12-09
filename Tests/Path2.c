@@ -188,7 +188,7 @@ START_TEST(StandardPathTest5)
     int* path = FindPath(stages, 40, 50, &length);
 
     // check the length
-    ck_assert_int_eq(length, 24);
+    ck_assert_int_eq(length, 131);
 
     // delete path and stages
     DeletePath(path);
