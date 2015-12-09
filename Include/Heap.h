@@ -6,7 +6,7 @@
 /*
  * Maximum heap size. Defines the size of the heap array.
  */
-#define MAX_HEAP_SIZE 3000
+#define MAX_HEAP_SIZE 1000
 
 /*
  * Heap type. Just an array of entries.
