@@ -173,6 +173,31 @@ START_TEST(StandardPathTest2)
 END_TEST
 
 /*
+ * Standard test #5.
+ */
+START_TEST(StandardPathTest5)
+  {
+
+    // create stages
+    Stage* stages = CreateStages(
+        "cccccccchcccchcccccchccccccchccchhhchcccccccccccccccccccchccchccchchccccchhhchcchhhcccccccchcchcccccccchcccccpccccccchcccchccccccccchcccccchccccchhchcchccccccccccccccccchhhcccchchchchcchcchcccchccchccccchccchchhcchccccchhcchcchcccccchhcchcchhchccccchhcccchcchcccccccccccchchccccqhcccchcccccchhcchccccccchchccccchhcccccchccccchcccccccccchcccccccchchccccchchcchchcccchhccccccccccchcchccccccccccchccchhcccccccccccccchccccchchhcchcccccchhccccchchhcccccchcccccchcchcchcchcchhccchcccccccchcccccccccchhcchccccchcccccchcchcccchhchccccccccchcchccccchccccccccchcccchhccccccccccccchcccchhcccccchcchcccccchccchccccchcccccchccccchhccccccchchhccccccchccccchcchcccchhcccccchhccchhchccccccccccccccccccchchcchcccchccccccchchcchhchhccchhcchhccchccccccchhcccccccchccchcccchcchhchcchhccccchccccccccchccccccccccccccccccccccccccccchcchccccchccchccchhcchcchhccccccchccchhhchhccchccchchhcccchchccchccchchhcccccccccccchccccccccccccchchccchhchcchchcccccccccchcccccccccccchccccccchccccccchhchcccccccchchcccchhhcccchchccccccchcccchhcchccccccccccccccchcccccccchcccccchccccchchchhhhcdccccccccccccccchchcccccchcchccccccccccccccchcccchcchchccccchccccccccccchchccccchhccccccccccccccchhcccchcchccccccchccccccccccchcchhcchccchchchchhcccchcccchcccccccchcccccccccccchhhhhchcccccccchccccccccccccchhcccccccccccchccchhcccccchhccccchchcchccchccccccchhcchchcccchchccccccccccccchcccccccccccccchchchchhhcccrhhccccchcccchcchhchhcchccccccccccccccccccccccccchcccccchccchcchhhccccchccccchcccccccchccchchcccccccchcccchchcchhcchhcchchhhccchcchhhhccccccccccccccchcccchchcccccccchcccccccchhhcchcchcccchcchccccccccccccchccccccccccccchccccccchcccchcchhhcchchccccccchcchhhcchccccchchccccchchcchccccccchccchcchcchhccccccchhhchhhchhcchchccccccchccccchcccccccccccccccccccccchcccccchchccchcchhhcchchcchhccccchchcchccchcccchccccchhhchccchhccccccchhccchchcchccccchccchcccccccccccccccccchcccccchccccccchccchccccchcccchhhcccccchccchchcccchccchccccchccccccccccchchchhhhhhhcchccccchccchcccccccchchccccccchhcccchcccccccchhccchhchccccchhccchcccccchhccccccchccchcccccc",
+        40, 50);
+
+    // find the path
+    uint length = 0;
+    int* path = FindPath(stages, 40, 50, &length);
+
+    // check the length
+    ck_assert_int_eq(length, 24);
+
+    // delete path and stages
+    DeletePath(path);
+    DeleteStages(stages);
+
+  }
+END_TEST
+
+/*
  * Path-finding test case.
  */
 TCase* Path2TCase() {
@@ -187,6 +212,7 @@ TCase* Path2TCase() {
   tcase_add_test(tcase, PathStationTest);
   tcase_add_test(tcase, StandardPathTest1);
   tcase_add_test(tcase, StandardPathTest2);
+  tcase_add_test(tcase, StandardPathTest5);
 
   // return the test case
   return tcase;
