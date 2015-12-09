@@ -17,13 +17,16 @@
   ushort tile = MAKE_1D(neighbourX, neighbourY, width); \
   char tileChar = stage->tiles[tile]; \
   \
-  if (tileChar != 'n') { \
-    neighbour.path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1)); \
-    neighbour.direction = dir; \
-    neighbour.history = entry.history; \
-    neighbour.tile = tile; \
-    \
-    HeapPush(heap, neighbour); \
+  uchar oldPath = stage->paths[tile]; \
+  if (oldPath == 0 || oldPath > entry.path) { \
+    if (tileChar != 'n') { \
+      neighbour.path = (uchar) (entry.path + (tileChar == 'h' ? 2 : 1)); \
+      neighbour.direction = dir; \
+      neighbour.history = entry.history; \
+      neighbour.tile = tile; \
+      \
+      HeapPush(heap, neighbour); \
+    } \
   }
 
 /*
